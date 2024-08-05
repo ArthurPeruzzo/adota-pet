@@ -21,7 +21,7 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
             animalEntityRepository.save(animalEntity);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            throw new RuntimeException("Ocorreu um erro ao salvar o animal");
+            throw new RuntimeException("Erro ao salvar animal");
         }
     }
 
