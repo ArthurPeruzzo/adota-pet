@@ -19,7 +19,11 @@ public class AnimalEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "animal_id")
     private Long id;
+
+    @OneToOne(mappedBy = "animal", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private AnimalInformationEntity animalInformation;
 
     @Column(name = "name")
     private String name;

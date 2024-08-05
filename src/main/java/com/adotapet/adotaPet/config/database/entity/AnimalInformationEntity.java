@@ -20,6 +20,10 @@ public class AnimalInformationEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "animal_id")
+    private AnimalEntity animal;
+
     @Column(name = "name")
     private String name;
 
