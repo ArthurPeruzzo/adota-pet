@@ -28,8 +28,8 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
     private AnimalEntity domainToEntity(Animal animal) {
         return AnimalEntity.builder()
                 .name(animal.getName())
-                .year(animal.getAge().getYear())
-                .month(animal.getAge().getMonth())
+                .birthYear(animal.getAge().getYear())
+                .birthMonth(animal.getAge().getMonth())
                 .weight(animal.getWeight())
                 .size(animal.getSize())
                 .specie(animal.getSpecie())

@@ -48,8 +48,8 @@ public class AnimalSpringDataRepositoryGatewayUnitTest {
         AnimalEntity animalValue = animalEntityAC.getValue();
 
         assertEquals(animal.getName(), animalValue.getName());
-        assertEquals(animal.getAge().getYear(), animalValue.getYear());
-        assertEquals(animal.getAge().getMonth(), animalValue.getMonth());
+        assertEquals(animal.getAge().getYear(), animalValue.getBirthYear());
+        assertEquals(animal.getAge().getMonth(), animalValue.getBirthMonth());
         assertEquals(animal.getWeight(), animalValue.getWeight());
         assertEquals(animal.getSize(), animalValue.getSize());
         assertEquals(animal.getSpecie(), animalValue.getSpecie());

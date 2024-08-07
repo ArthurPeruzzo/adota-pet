@@ -19,7 +19,6 @@ public class AnimalEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "animal_id")
     private Long id;
 
     @OneToOne(mappedBy = "animal", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -28,11 +27,11 @@ public class AnimalEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "year")
-    private Integer year;
+    @Column(name = "birth_year")
+    private Integer birthYear;
 
-    @Column(name = "month")
-    private Integer month;
+    @Column(name = "birth_month")
+    private Integer birthMonth;
 
     @Column(name = "weight")
     private Double weight;

@@ -6,9 +6,11 @@ import com.adotapet.adotaPet.core.usecase.CreateAnimalUseCase;
 import com.adotapet.adotaPet.shared.json.AnimalJson;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/animal")
 public class AnimalController {
@@ -17,8 +19,10 @@ public class AnimalController {
 
     @PostMapping("/create")
     public void create(@RequestBody @Valid AnimalJson animalJson) {
+        log.info("create animal, AnimalJson={}", animalJson);
         Animal animal = animalJsonToDomain(animalJson);
         createAnimalUseCase.create(animal);
+        log.info("created animal");
     }
 
     private Animal animalJsonToDomain(AnimalJson animalJson) {

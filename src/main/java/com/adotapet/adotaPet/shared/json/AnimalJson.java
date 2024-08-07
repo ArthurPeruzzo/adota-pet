@@ -6,9 +6,11 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class AnimalJson {
 
     @NotNull(message = "Nome deve ser preenchido")
