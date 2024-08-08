@@ -17,5 +17,6 @@ public class Animal {
     private Specie specie;
     private String race;
     private Sex sex;
+    private AnimalInformation information;
 
 }

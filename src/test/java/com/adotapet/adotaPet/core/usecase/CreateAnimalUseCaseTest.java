@@ -2,9 +2,11 @@ package com.adotapet.adotaPet.core.usecase;
 
 import com.adotapet.adotaPet.core.domain.Age;
 import com.adotapet.adotaPet.core.domain.Animal;
+import com.adotapet.adotaPet.core.domain.AnimalInformation;
 import com.adotapet.adotaPet.core.gateway.database.AnimalRepositoryGateway;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Specie;
+import com.adotapet.adotaPet.shared.enums.Status;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -33,6 +35,12 @@ public class CreateAnimalUseCaseTest {
                 .specie(Specie.CAT)
                 .race("Test")
                 .sex(Sex.FEMALE)
+                .information(AnimalInformation.builder()
+                        .about("Doguinho top")
+                        .status(Status.ACTIVE)
+                        .photo("urlPhoto")
+                        .location("São domingos SC")
+                        .build())
                 .build();
 
         createAnimalUseCase.create(animal);
@@ -51,5 +59,9 @@ public class CreateAnimalUseCaseTest {
         assertEquals(animal.getSpecie(), animalValue.getSpecie());
         assertEquals(animal.getRace(), animalValue.getRace());
         assertEquals(animal.getSex(), animalValue.getSex());
+        assertEquals(animal.getInformation().getAbout(), animalValue.getInformation().getAbout());
+        assertEquals(animal.getInformation().getStatus(), animalValue.getInformation().getStatus());
+        assertEquals(animal.getInformation().getPhoto(), animalValue.getInformation().getPhoto());
+        assertEquals(animal.getInformation().getLocation(), animalValue.getInformation().getLocation());
     }
 }

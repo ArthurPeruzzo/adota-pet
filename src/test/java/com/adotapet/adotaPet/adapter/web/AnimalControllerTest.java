@@ -4,6 +4,8 @@ import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.usecase.CreateAnimalUseCase;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Specie;
+import com.adotapet.adotaPet.shared.enums.Status;
+import com.adotapet.adotaPet.shared.json.AnimalInformationJson;
 import com.adotapet.adotaPet.shared.json.AnimalJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -40,6 +42,12 @@ public class AnimalControllerTest {
                 .specie(Specie.DOG)
                 .race("Guai")
                 .sex(Sex.MALE)
+                .information(AnimalInformationJson.builder()
+                        .about("Doguinho top")
+                        .status(Status.ACTIVE)
+                        .photo("urlPhoto")
+                        .location("São domingos SC")
+                        .build())
                 .build();
 
         mockMvc.perform(MockMvcRequestBuilders.post("/animal/create")
@@ -60,6 +68,10 @@ public class AnimalControllerTest {
         assertEquals(animalJson.getSpecie(), value.getSpecie());
         assertEquals(animalJson.getRace(), value.getRace());
         assertEquals(animalJson.getSex(), value.getSex());
+        assertEquals(animalJson.getInformation().getAbout(), value.getInformation().getAbout());
+        assertEquals(animalJson.getInformation().getStatus(), value.getInformation().getStatus());
+        assertEquals(animalJson.getInformation().getPhoto(), value.getInformation().getPhoto());
+        assertEquals(animalJson.getInformation().getLocation(), value.getInformation().getLocation());
     }
 
     @Test
@@ -70,6 +82,7 @@ public class AnimalControllerTest {
                 .weight(-1.00)
                 .size(-1.00)
                 .race("Guai")
+                .information(AnimalInformationJson.builder().build())
                 .build();
 
         mockMvc.perform(MockMvcRequestBuilders.post("/animal/create")

@@ -2,6 +2,7 @@ package com.adotapet.adotaPet.shared.json;
 
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Specie;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -37,4 +38,8 @@ public class AnimalJson {
 
     @NotNull(message = "O sexo do animal deve ser preenchido")
     private Sex sex;
+
+    @Valid
+    @NotNull
+    private AnimalInformationJson information;
 }

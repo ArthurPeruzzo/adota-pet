@@ -3,10 +3,7 @@ package com.adotapet.adotaPet.config.database.entity;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Specie;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -21,7 +18,9 @@ public class AnimalEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "animal", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @Setter
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "animal_information_id")
     private AnimalInformationEntity animalInformation;
 
     @Column(name = "name")

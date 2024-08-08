@@ -1,8 +1,10 @@
 package com.adotapet.adotaPet.core.gateway.database;
 
 import com.adotapet.adotaPet.config.database.entity.AnimalEntity;
+import com.adotapet.adotaPet.config.database.entity.AnimalInformationEntity;
 import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepository;
 import com.adotapet.adotaPet.core.domain.Animal;
+import com.adotapet.adotaPet.core.domain.AnimalInformation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -26,6 +28,16 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
     }
 
     private AnimalEntity domainToEntity(Animal animal) {
+        AnimalEntity animalEntity = animalToAnimalEntity(animal);
+
+        AnimalInformation information = animal.getInformation();
+        AnimalInformationEntity animalInformationEntity = animalInformationToAnimalInformationEntity(information, animalEntity);
+
+        animalEntity.setAnimalInformation(animalInformationEntity);
+        return animalEntity;
+    }
+
+    private static AnimalEntity animalToAnimalEntity(Animal animal) {
         return AnimalEntity.builder()
                 .name(animal.getName())
                 .birthYear(animal.getAge().getYear())
@@ -35,6 +47,16 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
                 .specie(animal.getSpecie())
                 .race(animal.getRace())
                 .sex(animal.getSex())
+                .build();
+    }
+
+    private static AnimalInformationEntity animalInformationToAnimalInformationEntity(AnimalInformation information, AnimalEntity animalEntity) {
+        return AnimalInformationEntity.builder()
+                .animal(animalEntity)
+                .about(information.getAbout())
+                .status(information.getStatus())
+                .photo(information.getPhoto())
+                .location(information.getLocation())
                 .build();
     }
 }

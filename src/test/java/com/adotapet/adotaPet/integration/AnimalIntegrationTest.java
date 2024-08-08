@@ -3,6 +3,8 @@ package com.adotapet.adotaPet.integration;
 import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepository;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Specie;
+import com.adotapet.adotaPet.shared.enums.Status;
+import com.adotapet.adotaPet.shared.json.AnimalInformationJson;
 import com.adotapet.adotaPet.shared.json.AnimalJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -39,6 +42,12 @@ public class AnimalIntegrationTest {
                 .specie(Specie.DOG)
                 .race("Guai")
                 .sex(Sex.MALE)
+                .information(AnimalInformationJson.builder()
+                        .about("Doguinho top")
+                        .status(Status.ACTIVE)
+                        .photo("urlPhoto")
+                        .location("São domingos SC")
+                        .build())
                 .build();
 
         mockMvc.perform(MockMvcRequestBuilders.post("/animal/create")

@@ -4,8 +4,10 @@ import com.adotapet.adotaPet.config.database.entity.AnimalEntity;
 import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepository;
 import com.adotapet.adotaPet.core.domain.Age;
 import com.adotapet.adotaPet.core.domain.Animal;
+import com.adotapet.adotaPet.core.domain.AnimalInformation;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Specie;
+import com.adotapet.adotaPet.shared.enums.Status;
 import org.apache.logging.log4j.util.InternalException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,6 +39,12 @@ public class AnimalSpringDataRepositoryGatewayUnitTest {
                 .specie(Specie.CAT)
                 .race("Test")
                 .sex(Sex.FEMALE)
+                .information(AnimalInformation.builder()
+                        .about("Doguinho top")
+                        .status(Status.ACTIVE)
+                        .photo("urlPhoto")
+                        .location("São domingos SC")
+                        .build())
                 .build();
 
         repositoryGateway.create(animal);
@@ -55,6 +63,10 @@ public class AnimalSpringDataRepositoryGatewayUnitTest {
         assertEquals(animal.getSpecie(), animalValue.getSpecie());
         assertEquals(animal.getRace(), animalValue.getRace());
         assertEquals(animal.getSex(), animalValue.getSex());
+        assertEquals(animal.getInformation().getAbout(), animalValue.getAnimalInformation().getAbout());
+        assertEquals(animal.getInformation().getStatus(), animalValue.getAnimalInformation().getStatus());
+        assertEquals(animal.getInformation().getPhoto(), animalValue.getAnimalInformation().getPhoto());
+        assertEquals(animal.getInformation().getLocation(), animalValue.getAnimalInformation().getLocation());
     }
 
     @Test
@@ -67,6 +79,7 @@ public class AnimalSpringDataRepositoryGatewayUnitTest {
                 .specie(Specie.CAT)
                 .race("Test")
                 .sex(Sex.FEMALE)
+                .information(AnimalInformation.builder().build())
                 .build();
 
         Mockito.when(animalEntityRepository.save(Mockito.any(AnimalEntity.class))).thenThrow(InternalException.class);

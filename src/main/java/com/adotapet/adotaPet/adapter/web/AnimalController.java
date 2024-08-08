@@ -2,7 +2,9 @@ package com.adotapet.adotaPet.adapter.web;
 
 import com.adotapet.adotaPet.core.domain.Age;
 import com.adotapet.adotaPet.core.domain.Animal;
+import com.adotapet.adotaPet.core.domain.AnimalInformation;
 import com.adotapet.adotaPet.core.usecase.CreateAnimalUseCase;
+import com.adotapet.adotaPet.shared.json.AnimalInformationJson;
 import com.adotapet.adotaPet.shared.json.AnimalJson;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ public class AnimalController {
     }
 
     private Animal animalJsonToDomain(AnimalJson animalJson) {
+        AnimalInformationJson information = animalJson.getInformation();
         return Animal.builder()
                 .name(animalJson.getName())
                 .age(Age.builder()
@@ -36,6 +39,12 @@ public class AnimalController {
                 .specie(animalJson.getSpecie())
                 .race(animalJson.getRace())
                 .sex(animalJson.getSex())
+                .information(AnimalInformation.builder()
+                        .about(information.getAbout())
+                        .status(information.getStatus())
+                        .photo(information.getPhoto())
+                        .location(information.getLocation())
+                        .build())
                 .build();
     }
 }
