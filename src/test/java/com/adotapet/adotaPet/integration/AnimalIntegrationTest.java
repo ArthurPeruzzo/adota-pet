@@ -12,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.transaction.annotation.Transactional;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -29,8 +33,12 @@ public class AnimalIntegrationTest {
     private AnimalEntityRepository animalEntityRepository;
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Test
+    @Transactional
+    @Rollback
     void shouldCreateAnimal() throws Exception {
 
         AnimalJson animalJson = AnimalJson.builder()
@@ -54,5 +62,14 @@ public class AnimalIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(animalJson)))
                 .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void shouldCreateSchemasWithFlyway() {
+        String sql = "SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'flyway_schema_history'";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
+        assertTrue(count != null && count > 0, "tabela 'flyway_schema_history' não existe.");
     }
 }

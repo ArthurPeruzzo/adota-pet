@@ -19,8 +19,7 @@ public class AnimalEntity implements Serializable {
     private Long id;
 
     @Setter
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "animal_information_id")
+    @OneToOne(mappedBy = "animal", cascade = CascadeType.ALL)
     private AnimalInformationEntity animalInformation;
 
     @Column(name = "name")

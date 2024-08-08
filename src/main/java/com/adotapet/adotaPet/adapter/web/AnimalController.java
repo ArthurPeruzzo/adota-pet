@@ -31,20 +31,28 @@ public class AnimalController {
         AnimalInformationJson information = animalJson.getInformation();
         return Animal.builder()
                 .name(animalJson.getName())
-                .age(Age.builder()
-                        .year(animalJson.getYear())
-                        .month(animalJson.getMonth()).build())
+                .age(buildAge(animalJson))
                 .weight(animalJson.getWeight())
                 .size(animalJson.getSize())
                 .specie(animalJson.getSpecie())
                 .race(animalJson.getRace())
                 .sex(animalJson.getSex())
-                .information(AnimalInformation.builder()
-                        .about(information.getAbout())
-                        .status(information.getStatus())
-                        .photo(information.getPhoto())
-                        .location(information.getLocation())
-                        .build())
+                .information(informationJsonToAnimalInformation(information))
+                .build();
+    }
+
+    private static Age buildAge(AnimalJson animalJson) {
+        return Age.builder()
+                .year(animalJson.getYear())
+                .month(animalJson.getMonth()).build();
+    }
+
+    private static AnimalInformation informationJsonToAnimalInformation(AnimalInformationJson information) {
+        return AnimalInformation.builder()
+                .about(information.getAbout())
+                .status(information.getStatus())
+                .photo(information.getPhoto())
+                .location(information.getLocation())
                 .build();
     }
 }

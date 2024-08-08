@@ -18,6 +18,7 @@ public class AnimalInformationEntity implements Serializable {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "animal_id", nullable = false)
     private AnimalEntity animal;
 
     @Column(name = "about")
