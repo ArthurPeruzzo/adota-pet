@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS animal (
     birth_year INTEGER,
     birth_month INTEGER,
     weight DOUBLE PRECISION,
-    size DOUBLE PRECISION,
+    size VARCHAR(255),
     specie VARCHAR(255),
     race VARCHAR(255),
     sex VARCHAR(255)
