@@ -3,6 +3,7 @@ package com.adotapet.adotaPet.adapter.web;
 import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.usecase.CreateAnimalUseCase;
 import com.adotapet.adotaPet.shared.enums.Sex;
+import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
 import com.adotapet.adotaPet.shared.enums.Status;
 import com.adotapet.adotaPet.shared.json.AnimalInformationJson;
@@ -38,7 +39,7 @@ public class AnimalControllerTest {
                 .year(0)
                 .month(1)
                 .weight(1.00)
-                .size(30.00)
+                .size(Size.MEDIUM)
                 .specie(Specie.DOG)
                 .race("Guai")
                 .sex(Sex.MALE)
@@ -80,7 +81,7 @@ public class AnimalControllerTest {
                 .year(-1)
                 .month(-1)
                 .weight(-1.00)
-                .size(-1.00)
+                .size(Size.MEDIUM)
                 .race("Guai")
                 .information(AnimalInformationJson.builder().build())
                 .build();

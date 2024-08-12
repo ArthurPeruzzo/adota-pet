@@ -1,6 +1,7 @@
 package com.adotapet.adotaPet.config.database.entity;
 
 import com.adotapet.adotaPet.shared.enums.Sex;
+import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,8 +35,9 @@ public class AnimalEntity implements Serializable {
     @Column(name = "weight")
     private Double weight;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "size")
-    private Double size;
+    private Size size;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "specie")

@@ -5,6 +5,7 @@ import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.domain.AnimalInformation;
 import com.adotapet.adotaPet.core.gateway.database.AnimalRepositoryGateway;
 import com.adotapet.adotaPet.shared.enums.Sex;
+import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
 import com.adotapet.adotaPet.shared.enums.Status;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class CreateAnimalUseCaseTest {
                 .name("test")
                 .age(Age.builder().year(1).month(1).build())
                 .weight(10.00)
-                .size(30.00)
+                .size(Size.MEDIUM)
                 .specie(Specie.CAT)
                 .race("Test")
                 .sex(Sex.FEMALE)

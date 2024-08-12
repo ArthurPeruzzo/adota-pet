@@ -2,6 +2,7 @@ package com.adotapet.adotaPet.integration;
 
 import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepository;
 import com.adotapet.adotaPet.shared.enums.Sex;
+import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
 import com.adotapet.adotaPet.shared.enums.Status;
 import com.adotapet.adotaPet.shared.json.AnimalInformationJson;
@@ -46,7 +47,7 @@ public class AnimalIntegrationTest {
                 .year(0)
                 .month(1)
                 .weight(1.00)
-                .size(30.00)
+                .size(Size.MEDIUM)
                 .specie(Specie.DOG)
                 .race("Guai")
                 .sex(Sex.MALE)

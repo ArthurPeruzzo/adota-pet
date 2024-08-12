@@ -1,6 +1,7 @@
 package com.adotapet.adotaPet.shared.json;
 
 import com.adotapet.adotaPet.shared.enums.Sex;
+import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -27,9 +28,8 @@ public class AnimalJson {
     @NotNull(message = "O peso deve ser preenchido!")
     private Double weight;
 
-    @NotNull(message = "O tamanho deve ser preenchido")
-    @Min(value = 0, message = "O peso do animal deve ser negativo")
-    private Double size;
+    @NotNull(message = "O porte deve ser preenchido")
+    private Size size;
 
     @NotNull(message = "A espécie deve ser preenchida")
     private Specie specie;
