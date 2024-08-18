@@ -18,6 +18,10 @@ public class OrganizationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    @OneToOne
+//    @JoinColumn(name = "animal_id", nullable = false)
+//    private AnimalEntity animal;
+
     @Column(name = "name")
     private String name;
 
