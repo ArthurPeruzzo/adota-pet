@@ -1,5 +1,8 @@
 package com.adotapet.adotaPet.shared.json;
 
+import com.adotapet.adotaPet.core.domain.Age;
+import com.adotapet.adotaPet.core.domain.Animal;
+import com.adotapet.adotaPet.core.domain.AnimalInformation;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
@@ -42,4 +45,18 @@ public class AnimalJson {
     @Valid
     @NotNull
     private AnimalInformationJson information;
+
+    public Animal toDomain(AnimalJson animalJson) {
+        AnimalInformationJson information = animalJson.getInformation();
+        return Animal.builder()
+                .name(animalJson.getName())
+                .age(Age.toDomain(animalJson.getYear(), animalJson.getMonth()))
+                .weight(animalJson.getWeight())
+                .size(animalJson.getSize())
+                .specie(animalJson.getSpecie())
+                .race(animalJson.getRace())
+                .sex(animalJson.getSex())
+                .information(AnimalInformation.toDomain(information))
+                .build();
+    }
 }
