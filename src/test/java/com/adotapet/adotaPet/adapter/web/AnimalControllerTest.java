@@ -28,96 +28,96 @@ import static org.mockito.Mockito.verify;
 @WebMvcTest(controllers = AnimalController.class)
 public class AnimalControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-    @MockBean
-    private CreateAnimalUseCase createAnimalUseCase;
-    @MockBean
-    private FindAnimalPageableByFilterUseCase findAnimalPageableByFilterUseCase;
-    @Autowired
-    private ObjectMapper objectMapper;
+	@Autowired
+	private MockMvc mockMvc;
+	@MockBean
+	private CreateAnimalUseCase createAnimalUseCase;
+	@MockBean
+	private FindAnimalPageableByFilterUseCase findAnimalPageableByFilterUseCase;
+	@Autowired
+	private ObjectMapper objectMapper;
 
-    @Test
-    void shouldCreateAnimalWithSuccess() throws Exception {
-        AnimalJson animalJson = AnimalJson.builder()
-                .name("doguinho")
-                .year(0)
-                .month(1)
-                .weight(1.00)
-                .size(Size.MEDIUM)
-                .specie(Specie.DOG)
-                .race("Guai")
-                .sex(Sex.MALE)
-                .information(AnimalInformationJson.builder()
-                        .about("Doguinho top")
-                        .status(Status.ACTIVE)
-                        .photo("urlPhoto")
-                        .location("São domingos SC")
-                        .build())
-                .build();
+	@Test
+	void shouldCreateAnimalWithSuccess() throws Exception {
+		AnimalJson animalJson = AnimalJson.builder()
+				.name("doguinho")
+				.year(0)
+				.month(1)
+				.weight(1.00)
+				.size(Size.MEDIUM)
+				.specie(Specie.DOG)
+				.race("Guai")
+				.sex(Sex.MALE)
+				.information(AnimalInformationJson.builder()
+						.about("Doguinho top")
+						.status(Status.ACTIVE)
+						.photo("urlPhoto")
+						.location("São domingos SC")
+						.build())
+				.build();
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/animal/create")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(animalJson)))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.post("/animal/create")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(animalJson)))
+				.andExpect(MockMvcResultMatchers.status().isOk());
 
-        ArgumentCaptor<Animal> animalAC = ArgumentCaptor.forClass(Animal.class);
-        verify(createAnimalUseCase).create(animalAC.capture());
+		ArgumentCaptor<Animal> animalAC = ArgumentCaptor.forClass(Animal.class);
+		verify(createAnimalUseCase).create(animalAC.capture());
 
-        Animal value = animalAC.getValue();
+		Animal value = animalAC.getValue();
 
-        assertEquals(animalJson.getName(), value.getName());
-        assertEquals(animalJson.getYear(), value.getAge().getYear());
-        assertEquals(animalJson.getMonth(), value.getAge().getMonth());
-        assertEquals(animalJson.getWeight(), value.getWeight());
-        assertEquals(animalJson.getSize(), value.getSize());
-        assertEquals(animalJson.getSpecie(), value.getSpecie());
-        assertEquals(animalJson.getRace(), value.getRace());
-        assertEquals(animalJson.getSex(), value.getSex());
-        assertEquals(animalJson.getInformation().getAbout(), value.getInformation().getAbout());
-        assertEquals(animalJson.getInformation().getStatus(), value.getInformation().getStatus());
-        assertEquals(animalJson.getInformation().getPhoto(), value.getInformation().getPhoto());
-        assertEquals(animalJson.getInformation().getLocation(), value.getInformation().getLocation());
-    }
+		assertEquals(animalJson.getName(), value.getName());
+		assertEquals(animalJson.getYear(), value.getAge().getYear());
+		assertEquals(animalJson.getMonth(), value.getAge().getMonth());
+		assertEquals(animalJson.getWeight(), value.getWeight());
+		assertEquals(animalJson.getSize(), value.getSize());
+		assertEquals(animalJson.getSpecie(), value.getSpecie());
+		assertEquals(animalJson.getRace(), value.getRace());
+		assertEquals(animalJson.getSex(), value.getSex());
+		assertEquals(animalJson.getInformation().getAbout(), value.getInformation().getAbout());
+		assertEquals(animalJson.getInformation().getStatus(), value.getInformation().getStatus());
+		assertEquals(animalJson.getInformation().getPhoto(), value.getInformation().getPhoto());
+		assertEquals(animalJson.getInformation().getLocation(), value.getInformation().getLocation());
+	}
 
-    @Test
-    void shouldThrowException400WhenCreateAnimal() throws Exception {
-        AnimalJson animalJson = AnimalJson.builder()
-                .year(-1)
-                .month(-1)
-                .weight(-1.00)
-                .size(Size.MEDIUM)
-                .race("Guai")
-                .information(AnimalInformationJson.builder().build())
-                .build();
+	@Test
+	void shouldThrowException400WhenCreateAnimal() throws Exception {
+		AnimalJson animalJson = AnimalJson.builder()
+				.year(-1)
+				.month(-1)
+				.weight(-1.00)
+				.size(Size.MEDIUM)
+				.race("Guai")
+				.information(AnimalInformationJson.builder().build())
+				.build();
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/animal/create")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(animalJson)))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+		mockMvc.perform(MockMvcRequestBuilders.post("/animal/create")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(animalJson)))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-    }
+	}
 
-    @Test
-    void shouldFindByFilterWithSuccess() throws Exception {
-        FilterAnimalJson filterJson = FilterAnimalJson.builder()
-                .size(Size.MEDIUM)
-                .sex(Sex.FEMALE)
-                .specie(Specie.CAT)
-                .build();
+	@Test
+	void shouldFindByFilterWithSuccess() throws Exception {
+		FilterAnimalJson filterJson = FilterAnimalJson.builder()
+				.size(Size.MEDIUM)
+				.sex(Sex.FEMALE)
+				.specie(Specie.CAT)
+				.build();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/animal/find-by-filter")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(filterJson)))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.get("/animal/find-by-filter")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(filterJson)))
+				.andExpect(MockMvcResultMatchers.status().isOk());
 
-        ArgumentCaptor<FilterAnimal> filterAnimalAC = ArgumentCaptor.forClass(FilterAnimal.class);
-        verify(findAnimalPageableByFilterUseCase).findByFilter(filterAnimalAC.capture());
+		ArgumentCaptor<FilterAnimal> filterAnimalAC = ArgumentCaptor.forClass(FilterAnimal.class);
+		verify(findAnimalPageableByFilterUseCase).findByFilter(filterAnimalAC.capture());
 
-        FilterAnimal value = filterAnimalAC.getValue();
+		FilterAnimal value = filterAnimalAC.getValue();
 
-        assertEquals(filterJson.getSize(), value.getSize());
-        assertEquals(filterJson.getSex(), value.getSex());
-        assertEquals(filterJson.getSpecie(), value.getSpecie());
-    }
+		assertEquals(filterJson.getSize(), value.getSize());
+		assertEquals(filterJson.getSex(), value.getSex());
+		assertEquals(filterJson.getSpecie(), value.getSpecie());
+	}
 }
