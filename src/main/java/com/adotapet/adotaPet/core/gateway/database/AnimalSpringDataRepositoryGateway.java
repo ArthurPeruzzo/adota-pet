@@ -5,8 +5,10 @@ import com.adotapet.adotaPet.config.database.entity.AnimalInformationEntity;
 import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepository;
 import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.domain.AnimalInformation;
+import com.adotapet.adotaPet.core.domain.FilterAnimal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,6 +27,11 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
             log.error(e.getMessage(), e);
             throw new RuntimeException("Erro ao salvar animal");
         }
+    }
+
+    @Override
+    public Page<Animal> findByFilter(FilterAnimal filter) {
+        return null;
     }
 
     private AnimalEntity domainToEntity(Animal animal) {

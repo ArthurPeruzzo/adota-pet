@@ -1,13 +1,16 @@
 package com.adotapet.adotaPet.adapter.web;
 
 import com.adotapet.adotaPet.core.domain.Animal;
+import com.adotapet.adotaPet.core.domain.FilterAnimal;
 import com.adotapet.adotaPet.core.usecase.CreateAnimalUseCase;
+import com.adotapet.adotaPet.core.usecase.FindAnimalPageableByFilterUseCase;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
 import com.adotapet.adotaPet.shared.enums.Status;
 import com.adotapet.adotaPet.shared.json.AnimalInformationJson;
 import com.adotapet.adotaPet.shared.json.AnimalJson;
+import com.adotapet.adotaPet.shared.json.FilterAnimalJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -29,6 +32,8 @@ public class AnimalControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private CreateAnimalUseCase createAnimalUseCase;
+    @MockBean
+    private FindAnimalPageableByFilterUseCase findAnimalPageableByFilterUseCase;
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -91,5 +96,28 @@ public class AnimalControllerTest {
                         .content(objectMapper.writeValueAsString(animalJson)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
+    }
+
+    @Test
+    void shouldFindByFilterWithSuccess() throws Exception {
+        FilterAnimalJson filterJson = FilterAnimalJson.builder()
+                .size(Size.MEDIUM)
+                .sex(Sex.FEMALE)
+                .specie(Specie.CAT)
+                .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/animal/find-by-filter")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(filterJson)))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        ArgumentCaptor<FilterAnimal> filterAnimalAC = ArgumentCaptor.forClass(FilterAnimal.class);
+        verify(findAnimalPageableByFilterUseCase).findByFilter(filterAnimalAC.capture());
+
+        FilterAnimal value = filterAnimalAC.getValue();
+
+        assertEquals(filterJson.getSize(), value.getSize());
+        assertEquals(filterJson.getSex(), value.getSex());
+        assertEquals(filterJson.getSpecie(), value.getSpecie());
     }
 }
