@@ -104,9 +104,11 @@ public class AnimalControllerTest {
 				.size(Size.MEDIUM)
 				.sex(Sex.FEMALE)
 				.specie(Specie.CAT)
+				.page(0)
+				.pageSize(10)
 				.build();
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/animal/find-by-filter")
+		mockMvc.perform(MockMvcRequestBuilders.post("/animal/find-by-filter")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(filterJson)))
 				.andExpect(MockMvcResultMatchers.status().isOk());

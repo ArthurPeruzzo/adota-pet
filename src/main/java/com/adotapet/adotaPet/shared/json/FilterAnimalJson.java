@@ -7,6 +7,7 @@ import com.adotapet.adotaPet.shared.enums.Specie;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.data.domain.PageRequest;
 
 @Getter
 @Builder
@@ -16,12 +17,15 @@ public class FilterAnimalJson {
 	private Size size;
 	private Sex sex;
 	private Specie specie;
+	private Integer page;
+	private Integer pageSize;
 
 	public FilterAnimal toDomain(FilterAnimalJson filter) {
 		return FilterAnimal.builder()
 				.size(filter.getSize())
 				.sex(filter.getSex())
 				.specie(filter.getSpecie())
+				.pageable(PageRequest.of(filter.getPage(), filter.getPageSize()))
 				.build();
 	}
 }

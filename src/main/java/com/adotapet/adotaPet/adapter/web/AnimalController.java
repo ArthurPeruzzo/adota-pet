@@ -30,10 +30,10 @@ public class AnimalController {
 		log.info("created animal");
 	}
 
-	@GetMapping("/find-by-filter")
+	@PostMapping("/find-by-filter")
 	public ResponseEntity<Page<Animal>> findByFilter(@RequestBody @Valid FilterAnimalJson filterAnimalJson) {
 		log.info("find animal by filter, filter={}", filterAnimalJson);
-		FilterAnimal filter = filterAnimalJson.toDomain(filterAnimalJson);
+		FilterAnimal filter = filterAnimalJson.toDomain(filterAnimalJson); //TODO aqui não deve ser dominio
 		Page<Animal> animals = findAnimalPageableByFilterUseCase.findByFilter(filter);
 		log.info("find animal finish");
 		return ResponseEntity.ok(animals);

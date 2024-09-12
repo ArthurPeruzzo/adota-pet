@@ -3,6 +3,8 @@ package com.adotapet.adotaPet.core.gateway.database;
 import com.adotapet.adotaPet.config.database.entity.AnimalEntity;
 import com.adotapet.adotaPet.config.database.entity.AnimalInformationEntity;
 import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepository;
+import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepositoryImplQueryDsl;
+import com.adotapet.adotaPet.core.domain.Age;
 import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.domain.AnimalInformation;
 import com.adotapet.adotaPet.core.domain.FilterAnimal;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Component;
 public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGateway {
 
     private final AnimalEntityRepository animalEntityRepository;
+    private final AnimalEntityRepositoryImplQueryDsl animalEntityRepositoryImplQueryDsl;
 
     @Override
     public void create(Animal animal) {
@@ -31,7 +34,28 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
 
     @Override
     public Page<Animal> findByFilter(FilterAnimal filter) {
-        return null;
+        return animalEntityRepositoryImplQueryDsl.findByFilter(filter)
+                .map(this::animalEntityToAnimalDomain);
+    }
+
+    private Animal animalEntityToAnimalDomain(AnimalEntity entity) {
+        final var animalInformation = entity.getAnimalInformation();
+        return Animal.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .age(Age.toDomain(entity.getBirthYear(), entity.getBirthMonth()))
+                .weight(entity.getWeight())
+                .size(entity.getSize())
+                .specie(entity.getSpecie())
+                .race(entity.getRace())
+                .sex(entity.getSex())
+                .information(AnimalInformation.builder()
+                    .about(animalInformation.getAbout())
+                    .status(animalInformation.getStatus())
+                    .photo(animalInformation.getPhoto())
+                    .location(animalInformation.getLocation())
+                .build())
+            .build();
     }
 
     private AnimalEntity domainToEntity(Animal animal) {
