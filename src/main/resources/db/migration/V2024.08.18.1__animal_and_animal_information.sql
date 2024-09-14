@@ -1,3 +1,10 @@
+CREATE TABLE IF NOT EXISTS organization (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    location VARCHAR(255),
+    phone VARCHAR(255)
+);
+
 CREATE TABLE IF NOT EXISTS animal (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -7,7 +14,8 @@ CREATE TABLE IF NOT EXISTS animal (
     size VARCHAR(255),
     specie VARCHAR(255),
     race VARCHAR(255),
-    sex VARCHAR(255)
+    sex VARCHAR(255),
+    id_organization BIGINT REFERENCES organization(id)
 );
 
 CREATE TABLE IF NOT EXISTS animal_information (

@@ -1,9 +1,9 @@
-package com.adotapet.adotaPet.core.usecase;
+package com.adotapet.adotaPet.core.usecase.animal;
 
 import com.adotapet.adotaPet.core.domain.Age;
 import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.domain.AnimalInformation;
-import com.adotapet.adotaPet.core.gateway.database.AnimalRepositoryGateway;
+import com.adotapet.adotaPet.core.gateway.database.animal.AnimalRepositoryGateway;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
