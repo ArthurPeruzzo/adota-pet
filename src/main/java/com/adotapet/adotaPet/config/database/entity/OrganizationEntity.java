@@ -26,4 +26,8 @@ public class OrganizationEntity {
 
     @Column(name = "location")
     private String location;
+
+    public OrganizationEntity(Long id) {
+        this.id = id;
+    }
 }

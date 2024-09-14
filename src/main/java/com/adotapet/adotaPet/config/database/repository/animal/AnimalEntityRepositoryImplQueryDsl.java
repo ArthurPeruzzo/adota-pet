@@ -1,4 +1,4 @@
-package com.adotapet.adotaPet.config.database.repository;
+package com.adotapet.adotaPet.config.database.repository.animal;
 
 import com.adotapet.adotaPet.config.database.entity.AnimalEntity;
 import com.adotapet.adotaPet.config.database.entity.QAnimalEntity;
@@ -55,13 +55,13 @@ public class AnimalEntityRepositoryImplQueryDsl {
 		BooleanExpression predicate = animalInformation.status.eq(Status.ACTIVE);
 
 		if (filter.getSize() != null) {
-			predicate.and(animal.size.eq(filter.getSize()));
+			predicate = predicate.and(animal.size.eq(filter.getSize()));
 		}
 		if (filter.getSex() != null) {
-			predicate.and(animal.sex.eq(filter.getSex()));
+			predicate = predicate.and(animal.sex.eq(filter.getSex()));
 		}
 		if (filter.getSpecie() != null) {
-			predicate.and(animal.specie.eq(filter.getSpecie()));
+			predicate = predicate.and(animal.specie.eq(filter.getSpecie()));
 		}
 
 		return predicate;

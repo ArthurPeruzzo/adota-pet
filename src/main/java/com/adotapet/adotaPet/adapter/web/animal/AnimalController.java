@@ -5,6 +5,7 @@ import com.adotapet.adotaPet.core.domain.FilterAnimal;
 import com.adotapet.adotaPet.core.usecase.animal.CreateAnimalUseCase;
 import com.adotapet.adotaPet.core.usecase.animal.FindAnimalPageableByFilterUseCase;
 import com.adotapet.adotaPet.shared.json.animal.AnimalJson;
+import com.adotapet.adotaPet.shared.json.animal.AnimalResponseJson;
 import com.adotapet.adotaPet.shared.json.animal.FilterAnimalJson;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +32,11 @@ public class AnimalController {
 	}
 
 	@PostMapping("/find-by-filter")
-	public ResponseEntity<Page<Animal>> findByFilter(@RequestBody @Valid FilterAnimalJson filterAnimalJson) {
+	public ResponseEntity<Page<AnimalResponseJson>> findByFilter(@RequestBody @Valid FilterAnimalJson filterAnimalJson) {
 		log.info("find animal by filter, filter={}", filterAnimalJson);
 		FilterAnimal filter = filterAnimalJson.toDomain(filterAnimalJson); //TODO aqui não deve ser dominio
-		Page<Animal> animals = findAnimalPageableByFilterUseCase.findByFilter(filter);
+		Page<AnimalResponseJson> animalsPage = findAnimalPageableByFilterUseCase.findByFilter(filter).map(AnimalResponseJson::new);
 		log.info("find animal finish");
-		return ResponseEntity.ok(animals);
+		return ResponseEntity.ok(animalsPage);
 	}
 }

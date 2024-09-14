@@ -2,12 +2,10 @@ package com.adotapet.adotaPet.core.gateway.database.animal;
 
 import com.adotapet.adotaPet.config.database.entity.AnimalEntity;
 import com.adotapet.adotaPet.config.database.entity.AnimalInformationEntity;
-import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepository;
-import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepositoryImplQueryDsl;
-import com.adotapet.adotaPet.core.domain.Age;
-import com.adotapet.adotaPet.core.domain.Animal;
-import com.adotapet.adotaPet.core.domain.AnimalInformation;
-import com.adotapet.adotaPet.core.domain.FilterAnimal;
+import com.adotapet.adotaPet.config.database.entity.OrganizationEntity;
+import com.adotapet.adotaPet.config.database.repository.animal.AnimalEntityRepository;
+import com.adotapet.adotaPet.config.database.repository.animal.AnimalEntityRepositoryImplQueryDsl;
+import com.adotapet.adotaPet.core.domain.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -49,13 +47,26 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
                 .specie(entity.getSpecie())
                 .race(entity.getRace())
                 .sex(entity.getSex())
-                .information(AnimalInformation.builder()
-                    .about(animalInformation.getAbout())
-                    .status(animalInformation.getStatus())
-                    .photo(animalInformation.getPhoto())
-                    .location(animalInformation.getLocation())
-                .build())
+                .information(animalInformationEntityToAnimalInformation(animalInformation))
+                .organization(organizationEntityToOrganization(entity.getOrganization()))
             .build();
+    }
+
+    private static AnimalInformation animalInformationEntityToAnimalInformation(AnimalInformationEntity animalInformationEntity) {
+        return AnimalInformation.builder()
+                .about(animalInformationEntity.getAbout())
+                .status(animalInformationEntity.getStatus())
+                .photo(animalInformationEntity.getPhoto())
+                .location(animalInformationEntity.getLocation())
+                .build();
+    }
+
+    private static Organization organizationEntityToOrganization(OrganizationEntity organizationEntity) {
+        return Organization.builder()
+                .name(organizationEntity.getName())
+                .phone(organizationEntity.getPhone())
+                .location(organizationEntity.getLocation())
+                .build();
     }
 
     private AnimalEntity domainToEntity(Animal animal) {
@@ -78,6 +89,7 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
                 .specie(animal.getSpecie())
                 .race(animal.getRace())
                 .sex(animal.getSex())
+                .organization(new OrganizationEntity(animal.getOrganization().getId()))
                 .build();
     }
 

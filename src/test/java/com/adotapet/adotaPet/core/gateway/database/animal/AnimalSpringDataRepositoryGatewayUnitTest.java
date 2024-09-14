@@ -1,14 +1,11 @@
-package com.adotapet.adotaPet.core.gateway.database;
+package com.adotapet.adotaPet.core.gateway.database.animal;
 
 import com.adotapet.adotaPet.config.database.entity.AnimalEntity;
 import com.adotapet.adotaPet.config.database.entity.AnimalInformationEntity;
-import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepository;
-import com.adotapet.adotaPet.config.database.repository.AnimalEntityRepositoryImplQueryDsl;
-import com.adotapet.adotaPet.core.domain.Age;
-import com.adotapet.adotaPet.core.domain.Animal;
-import com.adotapet.adotaPet.core.domain.AnimalInformation;
-import com.adotapet.adotaPet.core.domain.FilterAnimal;
-import com.adotapet.adotaPet.core.gateway.database.animal.AnimalSpringDataRepositoryGateway;
+import com.adotapet.adotaPet.config.database.entity.OrganizationEntity;
+import com.adotapet.adotaPet.config.database.repository.animal.AnimalEntityRepository;
+import com.adotapet.adotaPet.config.database.repository.animal.AnimalEntityRepositoryImplQueryDsl;
+import com.adotapet.adotaPet.core.domain.*;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
@@ -59,6 +56,12 @@ public class AnimalSpringDataRepositoryGatewayUnitTest {
                         .photo("urlPhoto")
                         .location("São domingos SC")
                         .build())
+                .organization(Organization.builder()
+                        .name("Ong")
+                        .phone("333333333")
+                        .location("São Domingos SC")
+                        .build())
+
                 .build();
 
         repositoryGateway.create(animal);
@@ -81,6 +84,7 @@ public class AnimalSpringDataRepositoryGatewayUnitTest {
         assertEquals(animal.getInformation().getStatus(), animalValue.getAnimalInformation().getStatus());
         assertEquals(animal.getInformation().getPhoto(), animalValue.getAnimalInformation().getPhoto());
         assertEquals(animal.getInformation().getLocation(), animalValue.getAnimalInformation().getLocation());
+        assertEquals(animal.getOrganization().getId(), animalValue.getOrganization().getId());
     }
 
     @Test
@@ -94,6 +98,7 @@ public class AnimalSpringDataRepositoryGatewayUnitTest {
                 .race("Test")
                 .sex(Sex.FEMALE)
                 .information(AnimalInformation.builder().build())
+                .organization(Organization.builder().build())
                 .build();
 
         Mockito.when(animalEntityRepository.save(Mockito.any(AnimalEntity.class))).thenThrow(InternalException.class);
@@ -119,6 +124,11 @@ public class AnimalSpringDataRepositoryGatewayUnitTest {
                         .status(Status.ACTIVE)
                         .photo("urlPhoto")
                         .location("São domingos SC")
+                        .build())
+                .organization(OrganizationEntity.builder()
+                        .name("Organization ong")
+                        .phone("333333333")
+                        .location("São Domingos sc")
                         .build())
                 .build();
 

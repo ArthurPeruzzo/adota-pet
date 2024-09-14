@@ -4,6 +4,7 @@ import com.adotapet.adotaPet.core.domain.FilterAnimal;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -17,7 +18,9 @@ public class FilterAnimalJson {
 	private Size size;
 	private Sex sex;
 	private Specie specie;
+	@NotNull
 	private Integer page;
+	@NotNull
 	private Integer pageSize;
 
 	public FilterAnimal toDomain(FilterAnimalJson filter) {
