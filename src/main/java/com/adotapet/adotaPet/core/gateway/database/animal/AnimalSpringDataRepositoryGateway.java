@@ -18,6 +18,7 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
 
     private final AnimalEntityRepository animalEntityRepository;
     private final AnimalEntityRepositoryImplQueryDsl animalEntityRepositoryImplQueryDsl;
+    private static final String urlPhoto = "https://raw.githubusercontent.com/ArthurPeruzzo/imagens/master/";
 
     @Override
     public void create(Animal animal) {
@@ -56,7 +57,7 @@ public class AnimalSpringDataRepositoryGateway implements AnimalRepositoryGatewa
         return AnimalInformation.builder()
                 .about(animalInformationEntity.getAbout())
                 .status(animalInformationEntity.getStatus())
-                .photo(animalInformationEntity.getPhoto())
+                .photo(urlPhoto + animalInformationEntity.getPhoto())
                 .location(animalInformationEntity.getLocation())
                 .build();
     }
