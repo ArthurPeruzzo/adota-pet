@@ -1,11 +1,11 @@
-package com.adotapet.adotaPet.adapter.web;
+package com.adotapet.adotaPet.adapter.web.animal;
 
 import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.domain.FilterAnimal;
-import com.adotapet.adotaPet.core.usecase.CreateAnimalUseCase;
-import com.adotapet.adotaPet.core.usecase.FindAnimalPageableByFilterUseCase;
-import com.adotapet.adotaPet.shared.json.AnimalJson;
-import com.adotapet.adotaPet.shared.json.FilterAnimalJson;
+import com.adotapet.adotaPet.core.usecase.animal.CreateAnimalUseCase;
+import com.adotapet.adotaPet.core.usecase.animal.FindAnimalPageableByFilterUseCase;
+import com.adotapet.adotaPet.shared.json.animal.AnimalJson;
+import com.adotapet.adotaPet.shared.json.animal.FilterAnimalJson;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

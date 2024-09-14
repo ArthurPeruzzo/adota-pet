@@ -1,4 +1,4 @@
-package com.adotapet.adotaPet.shared.json;
+package com.adotapet.adotaPet.shared.json.animal;
 
 import com.adotapet.adotaPet.core.domain.FilterAnimal;
 import com.adotapet.adotaPet.shared.enums.Sex;

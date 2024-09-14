@@ -23,9 +23,9 @@ public class AnimalEntity implements Serializable {
     @OneToOne(mappedBy = "animal", cascade = CascadeType.ALL)
     private AnimalInformationEntity animalInformation;
 
-//	@Setter
-//	@OneToOne(mappedBy = "animal", cascade = CascadeType.ALL)
-//	private OrganizationEntity organization;
+    @OneToOne
+    @JoinColumn(name = "organization_id", nullable = false)
+    private OrganizationEntity organization;
 
     @Column(name = "name")
     private String name;

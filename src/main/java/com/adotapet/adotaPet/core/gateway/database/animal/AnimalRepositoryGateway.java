@@ -1,4 +1,4 @@
-package com.adotapet.adotaPet.core.gateway.database;
+package com.adotapet.adotaPet.core.gateway.database.animal;
 
 import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.domain.FilterAnimal;

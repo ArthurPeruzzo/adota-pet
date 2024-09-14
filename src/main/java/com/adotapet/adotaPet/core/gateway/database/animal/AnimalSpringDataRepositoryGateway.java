@@ -1,4 +1,4 @@
-package com.adotapet.adotaPet.core.gateway.database;
+package com.adotapet.adotaPet.core.gateway.database.animal;
 
 import com.adotapet.adotaPet.config.database.entity.AnimalEntity;
 import com.adotapet.adotaPet.config.database.entity.AnimalInformationEntity;

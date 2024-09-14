@@ -1,8 +1,8 @@
-package com.adotapet.adotaPet.core.usecase;
+package com.adotapet.adotaPet.core.usecase.animal;
 
 import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.domain.FilterAnimal;
-import com.adotapet.adotaPet.core.gateway.database.AnimalRepositoryGateway;
+import com.adotapet.adotaPet.core.gateway.database.animal.AnimalRepositoryGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;

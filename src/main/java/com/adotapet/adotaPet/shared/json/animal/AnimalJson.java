@@ -1,4 +1,4 @@
-package com.adotapet.adotaPet.shared.json;
+package com.adotapet.adotaPet.shared.json.animal;
 
 import com.adotapet.adotaPet.core.domain.Age;
 import com.adotapet.adotaPet.core.domain.Animal;
@@ -45,6 +45,9 @@ public class AnimalJson {
     @Valid
     @NotNull
     private AnimalInformationJson information;
+
+    @NotNull(message = "A organização deve ser informada")
+    private Long organizationId;
 
     public Animal toDomain(AnimalJson animalJson) {
         AnimalInformationJson information = animalJson.getInformation();

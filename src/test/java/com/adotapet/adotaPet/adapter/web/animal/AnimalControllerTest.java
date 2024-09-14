@@ -1,16 +1,16 @@
-package com.adotapet.adotaPet.adapter.web;
+package com.adotapet.adotaPet.adapter.web.animal;
 
 import com.adotapet.adotaPet.core.domain.Animal;
 import com.adotapet.adotaPet.core.domain.FilterAnimal;
-import com.adotapet.adotaPet.core.usecase.CreateAnimalUseCase;
-import com.adotapet.adotaPet.core.usecase.FindAnimalPageableByFilterUseCase;
+import com.adotapet.adotaPet.core.usecase.animal.CreateAnimalUseCase;
+import com.adotapet.adotaPet.core.usecase.animal.FindAnimalPageableByFilterUseCase;
 import com.adotapet.adotaPet.shared.enums.Sex;
 import com.adotapet.adotaPet.shared.enums.Size;
 import com.adotapet.adotaPet.shared.enums.Specie;
 import com.adotapet.adotaPet.shared.enums.Status;
-import com.adotapet.adotaPet.shared.json.AnimalInformationJson;
-import com.adotapet.adotaPet.shared.json.AnimalJson;
-import com.adotapet.adotaPet.shared.json.FilterAnimalJson;
+import com.adotapet.adotaPet.shared.json.animal.AnimalInformationJson;
+import com.adotapet.adotaPet.shared.json.animal.AnimalJson;
+import com.adotapet.adotaPet.shared.json.animal.FilterAnimalJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

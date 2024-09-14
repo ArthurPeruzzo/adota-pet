@@ -1,7 +1,7 @@
 package com.adotapet.adotaPet.core.domain;
 
 import com.adotapet.adotaPet.shared.enums.Status;
-import com.adotapet.adotaPet.shared.json.AnimalInformationJson;
+import com.adotapet.adotaPet.shared.json.animal.AnimalInformationJson;
 import lombok.Builder;
 import lombok.Getter;
 
